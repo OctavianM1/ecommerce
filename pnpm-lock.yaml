@@ -10,7 +10,7 @@ importers:
       prettier: registry.npmjs.org/prettier/2.6.2
       turbo: registry.npmjs.org/turbo/1.2.1
 
-  apps/docs:
+  apps/admin-ui:
     specifiers:
       '@types/node': ^17.0.12
       '@types/react': 17.0.37
@@ -37,7 +37,7 @@ importers:
       tsconfig: link:../../packages/tsconfig
       typescript: registry.npmjs.org/typescript/4.6.3
 
-  apps/web:
+  apps/eshop-ui:
     specifiers:
       '@types/node': ^17.0.12
       '@types/react': 17.0.37
