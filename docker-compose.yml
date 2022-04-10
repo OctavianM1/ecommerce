@@ -1,0 +1,78 @@
+version: '3.9'
+
+services:
+  basket-service:
+    image: basket-service
+    build: 
+      context: .
+      dockerfile: ./apps/basket-service/Dockerfile
+      target: sourcer
+    volumes:
+      - ./apps/basket-service/src:/app/apps/basket-service/src
+      - ./apps/basket-service/nodemon.json:/app/apps/basket-service/nodemon.json
+    env_file:
+      - ./apps/basket-service/.env
+    container_name: basket-service
+    expose:
+      - 3100
+    ports:
+      - 3100:3100
+      - 9100:9100
+    command: yarn dev
+
+  ordering-service:
+    image: ordering-service
+    build: 
+      context: .
+      dockerfile: ./apps/ordering-service/Dockerfile
+      target: sourcer
+    volumes:
+      - ./apps/ordering-service/src:/app/apps/ordering-service/src
+      - ./apps/ordering-service/nodemon.json:/app/apps/ordering-service/nodemon.json
+    env_file:
+      - ./apps/ordering-service/.env
+    container_name: ordering-service
+    expose:
+      - 3101
+    ports:
+      - 3101:3101
+      - 9101:9101
+    command: yarn dev
+
+  products-service:
+    image: products-service
+    build: 
+      context: .
+      dockerfile: ./apps/products-service/Dockerfile
+      target: sourcer
+    volumes:
+      - ./apps/products-service/src:/app/apps/products-service/src
+      - ./apps/products-service/nodemon.json:/app/apps/products-service/nodemon.json
+    env_file:
+      - ./apps/products-service/.env
+    container_name: products-service
+    expose:
+      - 3102
+    ports:
+      - 3102:3102
+      - 9102:9102
+    command: yarn dev
+
+  users-service:
+    image: users-service
+    build: 
+      context: .
+      dockerfile: ./apps/users-service/Dockerfile
+      target: sourcer
+    volumes:
+      - ./apps/users-service/src:/app/apps/users-service/src
+      - ./apps/users-service/nodemon.json:/app/apps/users-service/nodemon.json
+    env_file:
+      - ./apps/users-service/.env
+    container_name: users-service
+    expose:
+      - 3103
+    ports:
+      - 3103:3103
+      - 9103:9103
+    command: yarn dev

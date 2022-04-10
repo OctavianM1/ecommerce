@@ -11,7 +11,8 @@
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
     "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "dev:products": "turbo run dev --parallel --scope=products-service"
   },
   "devDependencies": {
     "prettier": "^2.5.1",

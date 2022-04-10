@@ -1,6 +1,10 @@
 {
-  "watch": "src/**/*.ts",
+  "verbose": true,
+  "ignore": [],
+  "watch": [
+    "src/**/*.ts"
+  ],
   "execMap": {
-    "ts": "./node_modules/.bin/ts-node"
+    "ts": "node --inspect=0.0.0.0:9100 --nolazy -r ts-node/register"
   }
 }

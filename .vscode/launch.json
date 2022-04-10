@@ -1,0 +1,15 @@
+{
+  "configurations": [
+    {
+      "name": "Products-service Docker Node.js Launch",
+      "type": "node",
+      "request": "attach",
+      "remoteRoot": "/app/apps/products-service/src/",
+      "port": 9220,
+      "address": "localhost",
+      "protocol": "inspector",
+      "restart": true,
+      "localRoot": "${workspaceFolder}/apps/products-service/src/"
+    }
+  ]
+}
