@@ -19,3 +19,4 @@ COPY --from=builder /app/out/full/ .
 
 FROM sourcer as production
 RUN yarn turbo run build --scope=basket-service --include-dependencies --no-deps
+CMD [ "yarn", "start" ]
