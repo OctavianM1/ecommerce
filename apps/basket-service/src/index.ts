@@ -7,7 +7,7 @@ dotenv.config();
 const app = express();
 
 app.get('/', (req, res) => {
-  res.send(`Hello from basket service1 ${os.hostname()}`);
+  res.send(`Hello from basket service ${os.hostname()}`);
 });
 
 const port = process.env.PORT;
