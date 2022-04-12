@@ -140,7 +140,7 @@ class BasketService extends Stack {
               },
               artifacts: {
                 baseDirectory: '.next',
-                files: -'**/*',
+                files: ['**/*'],
               },
               cache: {
                 paths: ['node_modules/**/*'],
