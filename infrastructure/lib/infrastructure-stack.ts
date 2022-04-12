@@ -22,7 +22,7 @@ export class PipelineStack extends Stack {
       }),
     });
 
-    // pipeline.addStage(new MyApplication(this, 'test-env'));
+    pipeline.addStage(new MyApplication(this, 'test-env'));
   }
 }
 
