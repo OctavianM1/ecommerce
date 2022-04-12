@@ -21,8 +21,9 @@ export class PipelineStack extends Stack {
         primaryOutputDirectory: 'infrastructure/cdk.out',
       }),
     });
-
-    pipeline.addStage(new MyApplication(this, 'test-env'));
+    pipeline.addStage(new MyApplication(this, 'test-env'), {
+      pre: [new pipelines.ManualApprovalStep('DeployToEnv')],
+    });
   }
 }
 
