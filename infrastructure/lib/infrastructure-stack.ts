@@ -12,6 +12,7 @@ export class PipelineStack extends Stack {
     super(scope, id, props);
 
     const pipeline = new pipelines.CodePipeline(this, 'test-pipeline', {
+      selfMutation: false,
       synth: new pipelines.ShellStep('Synth', {
         input: pipelines.CodePipelineSource.connection('OctavianM1/ecommerce', 'release', {
           connectionArn:
