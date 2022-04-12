@@ -1,4 +1,4 @@
-import { Stack, StackProps, Stage, StageProps } from 'aws-cdk-lib';
+import { SecretValue, Stack, StackProps, Stage, StageProps } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import * as ecs from 'aws-cdk-lib/aws-ecs';
@@ -6,6 +6,8 @@ import * as ecr from 'aws-cdk-lib/aws-ecr';
 import * as elbv2 from 'aws-cdk-lib/aws-elasticloadbalancingv2';
 import * as codedeploy from 'aws-cdk-lib/aws-codedeploy';
 import * as pipelines from 'aws-cdk-lib/pipelines';
+import * as amplify from '@aws-cdk/aws-amplify-alpha';
+import * as codebuild from 'aws-cdk-lib/aws-codebuild';
 
 export class PipelineStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
@@ -114,5 +116,42 @@ class BasketService extends Stack {
         deploymentGroupName: 'basket-service-deployment-group',
       }
     );
+
+    const amplifyApp = new amplify.App(this, 'eshop-ui', {
+      appName: 'eshop-ui',
+      sourceCodeProvider: new amplify.GitHubSourceCodeProvider({
+        owner: 'OctavianM1',
+        repository: 'ecommerce',
+        oauthToken: SecretValue.secretsManager('github-oauth-token'),
+      }),
+      buildSpec: codebuild.BuildSpec.fromObjectToYaml({
+        version: '1.0',
+        applications: [
+          {
+            appRoot: 'apps/eshop-ui',
+            frontend: {
+              phases: {
+                preBuild: {
+                  commands: ['yarn'],
+                },
+                build: {
+                  commands: ['yarn build'],
+                },
+              },
+              artifacts: {
+                baseDirectory: '.next',
+                files: -'**/*',
+              },
+              cache: {
+                paths: ['node_modules/**/*'],
+              },
+            },
+          },
+        ],
+      }),
+      environmentVariables: {
+        NEXT_PUBLIC_BASKET_SERVICE: `http://${loadBalancer.loadBalancerDnsName}`,
+      },
+    });
   }
 }
