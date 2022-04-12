@@ -153,5 +153,6 @@ class BasketService extends Stack {
         NEXT_PUBLIC_BASKET_SERVICE: `http://${loadBalancer.loadBalancerDnsName}`,
       },
     });
+    amplifyApp.addBranch('release');
   }
 }
