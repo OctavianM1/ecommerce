@@ -52,7 +52,7 @@ class BasketService extends Stack {
     cluster.addCapacity('basket-service-ecs-capacity', {
       instanceType: new ec2.InstanceType('t2.micro'),
       minCapacity: 1,
-      desiredCapacity: 2,
+      desiredCapacity: 1,
       maxCapacity: 3,
     });
 
