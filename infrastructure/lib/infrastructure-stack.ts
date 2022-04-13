@@ -119,7 +119,7 @@ class BasketService extends Stack {
     );
 
     const amplifyRole = new iam.Role(this, 'amplify-role', {
-      assumedBy: new iam.ServicePrincipal('amplify.amazon.com'),
+      assumedBy: new iam.ServicePrincipal('amplify.amazonaws.com'),
     });
     amplifyRole.addManagedPolicy(iam.ManagedPolicy.fromAwsManagedPolicyName('AdministratorAccess-Amplify'));
 
