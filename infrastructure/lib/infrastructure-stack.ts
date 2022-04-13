@@ -132,10 +132,10 @@ class BasketService extends Stack {
             frontend: {
               phases: {
                 preBuild: {
-                  commands: ['yarn'],
+                  commands: ['nvm use $VERSION_NODE_16', 'yarn'],
                 },
                 build: {
-                  commands: ['yarn build'],
+                  commands: ['nvm use $VERSION_NODE_16', 'yarn build'],
                 },
               },
               artifacts: {
