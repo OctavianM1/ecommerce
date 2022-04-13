@@ -133,6 +133,7 @@ class BasketService extends Stack {
       role: amplifyRole,
       environmentVariables: {
         NEXT_PUBLIC_BASKET_SERVICE: `http://${loadBalancer.loadBalancerDnsName}`,
+        AMPLIFY_MONOREPO_APP_ROOT: 'apps/eshop-ui',
       },
     });
     amplifyApp.addBranch('release');
