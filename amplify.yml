@@ -1,6 +1,6 @@
 version: 1
 applications:
-  - frontend:
+  - eshop-ui:
       phases:
         preBuild:
           commands:
