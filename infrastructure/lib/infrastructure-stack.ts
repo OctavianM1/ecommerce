@@ -8,6 +8,7 @@ import * as codedeploy from 'aws-cdk-lib/aws-codedeploy';
 import * as pipelines from 'aws-cdk-lib/pipelines';
 import * as amplify from '@aws-cdk/aws-amplify-alpha';
 import * as codebuild from 'aws-cdk-lib/aws-codebuild';
+import * as iam from 'aws-cdk-lib/aws-iam';
 
 export class PipelineStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
@@ -117,6 +118,11 @@ class BasketService extends Stack {
       }
     );
 
+    const amplifyRole = new iam.Role(this, 'amplify-role', {
+      assumedBy: new iam.ServicePrincipal('amplify.amazon.com'),
+    });
+    amplifyRole.addManagedPolicy(iam.ManagedPolicy.fromAwsManagedPolicyName('AdministratorAccess-Amplify'));
+
     const amplifyApp = new amplify.App(this, 'eshop-ui', {
       appName: 'eshop-ui',
       sourceCodeProvider: new amplify.GitHubSourceCodeProvider({
@@ -124,6 +130,7 @@ class BasketService extends Stack {
         repository: 'ecommerce',
         oauthToken: SecretValue.secretsManager('github-oauth-token'),
       }),
+      role: amplifyRole,
       buildSpec: codebuild.BuildSpec.fromObjectToYaml({
         version: '1.0',
         applications: [
