@@ -131,31 +131,6 @@ class BasketService extends Stack {
         oauthToken: SecretValue.secretsManager('github-oauth-token'),
       }),
       role: amplifyRole,
-      buildSpec: codebuild.BuildSpec.fromObjectToYaml({
-        version: '1.0',
-        applications: [
-          {
-            appRoot: 'apps/eshop-ui',
-            frontend: {
-              phases: {
-                preBuild: {
-                  commands: ['nvm use $VERSION_NODE_16', 'yarn'],
-                },
-                build: {
-                  commands: ['nvm use $VERSION_NODE_16', 'yarn build'],
-                },
-              },
-              artifacts: {
-                baseDirectory: '.next',
-                files: ['**/*'],
-              },
-              cache: {
-                paths: ['node_modules/**/*'],
-              },
-            },
-          },
-        ],
-      }),
       environmentVariables: {
         NEXT_PUBLIC_BASKET_SERVICE: `http://${loadBalancer.loadBalancerDnsName}`,
       },
