@@ -30,9 +30,6 @@ export function createEcsCluster({ vpc, scope, service, env = {} }: CreateEcsClu
 
   cluster.addCapacity(`${service.name}-ecs-capacity`, {
     instanceType: new ec2.InstanceType('t2.micro'),
-    minCapacity: 1,
-    desiredCapacity: 1,
-    maxCapacity: 3,
   });
 
   const taskDefinition = new ecs.Ec2TaskDefinition(scope, `${service.name}-task-definition`, {
@@ -77,6 +74,7 @@ export function createEcsCluster({ vpc, scope, service, env = {} }: CreateEcsClu
   const targetGroup2 = new elbv2.ApplicationTargetGroup(scope, `${service.name}-tg-2`, {
     vpc,
     port: 80,
+    targetType: elbv2.TargetType.INSTANCE,
   });
 
   const application = new codedeploy.EcsApplication(scope, `${service.name}-application`, {

@@ -59,8 +59,8 @@ export class AppStack extends Stack {
 
     const servicesStack = new ServicesStack(this, { vpc });
     const servicesEnvironment = servicesStack.outputs.map((o) => ({
-      dns: `${o.serviceName.replace('-', '_').toUpperCase()}_URL`, // e.g. from basket-service to BASKET_SERVICE_URL
-      key: o.loadBalancer.loadBalancerDnsName,
+      key: `${o.serviceName.replace('-', '_').toUpperCase()}_URL`, // e.g. from basket-service to BASKET_SERVICE_URL
+      dns: o.loadBalancer.loadBalancerDnsName,
     }));
 
     servicesStack.outputs.forEach((o) => {

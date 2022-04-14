@@ -8,22 +8,22 @@ interface ServicesStackProps extends NestedStackProps {
 }
 
 export const services = [
-  {
-    name: 'basket-service',
-    containerPort: 3100,
-  },
-  {
-    name: 'ordering-service',
-    containerPort: 3101,
-  },
+  // {
+  //   name: 'basket-service',
+  //   containerPort: 3100,
+  // },
+  // {
+  //   name: 'ordering-service',
+  //   containerPort: 3101,
+  // },
   {
     name: 'products-service',
     containerPort: 3102,
   },
-  {
-    name: 'users-service',
-    containerPort: 3103,
-  },
+  // {
+  //   name: 'users-service',
+  //   containerPort: 3103,
+  // },
 ];
 
 export class ServicesStack extends NestedStack {
