@@ -1,7 +1,7 @@
 import { NestedStack, NestedStackProps } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import * as ec2 from 'aws-cdk-lib/aws-ec2';
-import { createEcsCluster } from '../utils/createEcsCluster';
+import { createEcsCluster, EcsClusterOutput } from '../utils/createEcsCluster';
 
 interface ServicesStackProps extends NestedStackProps {
   readonly vpc: ec2.Vpc;
@@ -27,7 +27,7 @@ export const services = [
 ];
 
 export class ServicesStack extends NestedStack {
-  public outputs;
+  public outputs: EcsClusterOutput[];
   constructor(scope: Construct, props: ServicesStackProps) {
     super(scope, 'services-stack', props);
     const { vpc } = props;

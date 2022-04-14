@@ -17,6 +17,12 @@ type CreateEcsClusterProps = {
   readonly env?: { [key: string]: string };
 };
 
+export type EcsClusterOutput = {
+  loadBalancer: elbv2.ApplicationLoadBalancer;
+  container: ecs.ContainerDefinition;
+  serviceName: string;
+};
+
 export function createEcsCluster({ vpc, scope, service, env = {} }: CreateEcsClusterProps) {
   const cluster = new ecs.Cluster(scope, `${service.name}-ecs-cluster`, {
     vpc,
