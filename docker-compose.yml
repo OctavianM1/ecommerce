@@ -76,3 +76,22 @@ services:
       - 3103:3103
       - 9103:9103
     command: yarn dev
+
+  customer-bff:
+    image: customer-bff
+    build: 
+      context: .
+      dockerfile: ./apps/customer-bff/Dockerfile
+      target: sourcer
+    volumes:
+      - ./apps/customer-bff/src:/app/apps/customer-bff/src
+      - ./apps/customer-bff/nodemon.json:/app/apps/customer-bff/nodemon.json
+    env_file:
+      - ./apps/customer-bff/.env
+    container_name: customer-bff
+    expose:
+      - 3200
+    ports:
+      - 3200:3200
+      - 9200:9200
+    command: yarn dev

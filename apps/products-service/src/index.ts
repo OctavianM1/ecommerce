@@ -6,7 +6,7 @@ const app = express();
 
 app.get('/', (req, res) => {
   console.log('here');
-  res.send('Hello from products service 123 ' + process.env.NODE_ENV);
+  res.send('Hello from products service ' + process.env.NODE_ENV);
 });
 
 const port = process.env.PORT;
