@@ -17,7 +17,6 @@ import * as pipelines from 'aws-cdk-lib/pipelines';
 import * as amplify from '@aws-cdk/aws-amplify-alpha';
 import * as iam from 'aws-cdk-lib/aws-iam';
 import { services, ServicesStack } from './services-stack';
-import { fromEntires } from '../utils/fromEntries';
 import { ApiGatewayBffStack } from './api-gateway-stack';
 import { EShopUIStack } from './frontend-stacks';
 
@@ -77,7 +76,7 @@ export class AppStack extends Stack {
       },
     });
     const apiGatewaysEnvironment = apiGatewaysStack.outputs.reduce((env: { [key: string]: string }, o) => {
-      env[o.loadBalancer.loadBalancerDnsName] = `${o.serviceName.replace('-', '_').toUpperCase()}_URL`;
+      env[`${o.serviceName.replace('-', '_').toUpperCase()}_URL`] = o.loadBalancer.loadBalancerDnsName;
       return env;
     }, {});
 
