@@ -1,12 +1,13 @@
 import express from 'express';
-import dotenv from 'dotenv'
+import dotenv from 'dotenv';
+import os from 'os';
 dotenv.config();
 
 const app = express();
 
 app.get('/', (req, res) => {
   console.log('here');
-  res.send('Hello from products service ' + process.env.NODE_ENV);
+  res.send('Hello from products service ' + os.hostname());
 });
 
 const port = process.env.PORT;
